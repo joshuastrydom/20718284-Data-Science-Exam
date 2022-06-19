@@ -147,3 +147,53 @@ hospitalICU2 <- hospitalICU |>
     slice(n()) |> 
     ungroup()
 '''    
+
+# Question 2
+
+## Data
+
+'''
+library("lubridate")
+london_weather[ , 1] <- ymd(london_weather[, 1])
+'''
+
+## Plotting
+
+'''
+monthlycloudcover(data1 = london_weather)
+'''
+
+'''
+monthlysunshine(data1 = london_weather)
+'''
+
+'''
+monthlymeantemp(data1 = london_weather)
+'''
+
+'''
+monthlyprecipitation(data1 = london_weather)
+'''
+
+## Table
+
+'''
+Avecloudcover <- monthlycloudcover_table(data1 = london_weather)
+Avesunshine <- monthlysunshine_table(data1 = london_weather)
+Avemeantemp <- monthlymeantemp_table(data1 = london_weather)
+Aveprecipitation <- monthlyprecipitation_table(data1 = london_weather)
+'''
+
+'''
+library(xtable)
+data <- data.frame(Avecloudcover, Avesunshine, Avemeantemp, Aveprecipitation)
+table <- xtable(data, caption = "Average values throughout the year \\label{tab1}")
+  print.xtable(table,
+             # tabular.environment = "longtable",
+             floating = TRUE,
+             table.placement = 'H',
+             # scalebox = 0.3,
+             comment = FALSE,
+             caption.placement = 'bottom'
+             )
+'''
