@@ -2,7 +2,6 @@
 2022 exam submission
 ## Getting started
 
-'''
 
 > devtools::install_github("Nicktz/fmxdat", force = TRUE)
 > CHOSEN_LOCATION <- "/Users/joshuastrydom/Desktop/ECONOMICS POSTGRADUATE/Masters/Data Science/20718284-Data-Science-Exam/"
@@ -15,7 +14,6 @@
 > Texevier::create_template(directory = glue::glue("{CHOSEN_LOCATION}Solution/20718284/"), template_name = "Question3")
 > Texevier::create_template(directory = glue::glue("{CHOSEN_LOCATION}Solution/20718284/"), template_name = "Question4")
 
-'''
 
 # Question 1
 Much time was spent on data wrangling and manipulation. 
@@ -24,36 +22,24 @@ Much time was spent on data wrangling and manipulation.
 ### BRICS comparison
 The first comparision between countries was made between BRICS countries. The BRICS_insights and africa insights functions allow for the graphing of the results. 
 
-'''
 
 > BRICS_countries <- c("Brazil", "Russia", "India", "China", "South Africa")
 
 > BRICS <- owid_covid_data |> filter(location == c("Brazil","Russia","India","China","South Africa"))
 
-'''
 
 The insights for the BRICS countries were made as follows
 
-'''
-
 > BRICS_insights(BRICS)
-
-'''
 
 ### African comparisons
 The insights for the African countries were made as follows
 
-'''
-
 > africa_insights(africa)
-
-'''
 
 ### Concentrated groupings
 
 A variable called group was created to filter for variables of interest in trying to find specific concentrated groupings. Distinct patterns were found. 
-
-'''
 
 > group <- owid_covid_data[,c(1:5,8,11,14,36,49,51:52,58:62)] |> 
     group_by(owid_covid_data$location) |> 
@@ -61,11 +47,7 @@ A variable called group was created to filter for variables of interest in tryin
     slice(c(n())) |> 
     ungroup()    
 
-'''
-
 Each variable below was used to create the upcoming graphs. These variables, using a host of different functions, find the mean of the variable at hand at both the top 10% as well as the bottom 10% of the sample. These means are then combined with mortality rates of both the population in general and of the indiviuals that contracted Covid. The format of the data needed to be changed (made longer) in order to graph the data well. 
-
-'''
 
 > life_expectancy <- specficmean(data1=group, data2=group$life_expectancy, data3 = "life_expectancy")
 
@@ -119,69 +101,41 @@ Each variable below was used to create the upcoming graphs. These variables, usi
 
 > merged_handwashing1 <- merged_handwashing |> pivot_longer(!handwashing_facilities, names_to = "Variable", values_to = "Value")
 
-'''
-
 #### Plotting
 
 These plots were created to visualie the comparisons. 
-
-'''
 
 > ggplot(merged_life_expectancy1, aes(x = life_expectancy, y = Value, fill = Variable))+
   geom_col(position = "dodge") +
   geom_text(aes(label = Value), size = 2, vjust = 1.5, position = position_dodge(.9)) +
   theme(text = element_text(size=7))
 
-'''
-
-'''
-
 > ggplot(merged_female_smokers1, aes(x = female_smokers, y = Value, fill = Variable))+
   geom_col(position = "dodge") +
   geom_text(aes(label = Value), size = 2, vjust = 1.5, position = position_dodge(.9)) +
   theme(text = element_text(size=7))
-
-'''
-
-'''
 
 > ggplot(merged_male_smokers1, aes(x = male_smokers, y = Value, fill = Variable))+
   geom_col(position = "dodge") +
   geom_text(aes(label = Value), size = 2, vjust = 1.5, position = position_dodge(.9)) +
   theme(text = element_text(size=7))
 
-'''
-
-'''
-
 > ggplot(merged_elderly1, aes(x = aged_65_older, y = Value, fill = Variable))+
   geom_col(position = "dodge") +
   geom_text(aes(label = Value), size = 2, vjust = 1.5, position = position_dodge(.9)) +
   theme(text = element_text(size=7))
-
-'''
-
-'''
 
 > ggplot(merged_hospitalbeds1, aes(x = hospital_beds_per_thousand, y = Value, fill = Variable))+
   geom_col(position = "dodge") +
   geom_text(aes(label = Value), size = 2, vjust = 1.5, position = position_dodge(.9)) +
   theme(text = element_text(size=7))
 
-'''
-
-'''
-
 > ggplot(merged_handwashing1, aes(x = handwashing_facilities, y = Value, fill = Variable))+
   geom_col(position = "dodge") +
   geom_text(aes(label = Value), size = 2, vjust = 1.5, position = position_dodge(.9)) +
   theme(text = element_text(size=7))
 
-'''
-
 ### Hospitals and ICU patients
-
-'''
 
 > hospitalICU <- owid_covid_data[,c(3,4,18,20,22,24,49,61)] |> drop_na()
 
@@ -199,7 +153,6 @@ These plots were created to visualie the comparisons.
     slice(n()) |> 
     ungroup()
 
-'''    
 
 # Question 2
 
@@ -207,47 +160,25 @@ These plots were created to visualie the comparisons.
 
 The first step was to convert the date column to date format using lubridate. 
 
-'''
-
 > library("lubridate")
 
 > london_weather[ , 1] <- ymd(london_weather[, 1])
-
-'''
 
 ## Plotting
 
 Plots were generated using various functions. These plots considered monthly cloud cover, monthly sunshine, monthly mean temperature and monthly precipitation. 
 
-'''
-
 > monthlycloudcover(data1 = london_weather)
-
-'''
-
-'''
 
 > monthlysunshine(data1 = london_weather)
 
-'''
-
-'''
-
 > monthlymeantemp(data1 = london_weather)
 
-'''
-
-'''
-
 > monthlyprecipitation(data1 = london_weather)
-
-'''
 
 ## Table
 
 I order to display the averages for the year, variables needed to be created. These yearly outcome variables were combined into a table to make for a pretty visualisation. 
-
-'''
 
 > Avecloudcover <- monthlycloudcover_table(data1 = london_weather)
 
@@ -257,11 +188,7 @@ I order to display the averages for the year, variables needed to be created. Th
 
 > Aveprecipitation <- monthlyprecipitation_table(data1 = london_weather)
 
-'''
-
-'''
-
-library(xtable)
+> library(xtable)
 
 > data <- data.frame(Avecloudcover, Avesunshine, Avemeantemp, Aveprecipitation)
 
@@ -274,5 +201,3 @@ library(xtable)
              comment = FALSE,
              caption.placement = 'bottom'
              )
-
-'''
