@@ -1,0 +1,336 @@
+\documentclass[11pt,preprint, authoryear]{elsarticle}
+
+\usepackage{lmodern}
+%%%% My spacing
+\usepackage{setspace}
+\setstretch{1.2}
+\DeclareMathSizes{12}{14}{10}{10}
+
+% Wrap around which gives all figures included the [H] command, or places it "here". This can be tedious to code in Rmarkdown.
+\usepackage{float}
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+    \expandafter\origfigure\expandafter[H]
+} {
+    \endorigfigure
+}
+
+\let\origtable\table
+\let\endorigtable\endtable
+\renewenvironment{table}[1][2] {
+    \expandafter\origtable\expandafter[H]
+} {
+    \endorigtable
+}
+
+
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+    \usepackage{xltxtra,xunicode}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Mapping=tex-text,Scale=MatchLowercase}
+  \newcommand{\euro}{€}
+\fi
+
+\usepackage{amssymb, amsmath, amsthm, amsfonts}
+
+\def\bibsection{\section*{References}} %%% Make "References" appear before bibliography
+
+
+\usepackage[round]{natbib}
+
+\usepackage{longtable}
+\usepackage[margin=2.3cm,bottom=2cm,top=2.5cm, includefoot]{geometry}
+\usepackage{fancyhdr}
+\usepackage[bottom, hang, flushmargin]{footmisc}
+\usepackage{graphicx}
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{1.3ex plus 0.5ex minus 0.3ex}
+\usepackage{textcomp}
+\renewcommand{\headrulewidth}{0.2pt}
+\renewcommand{\footrulewidth}{0.3pt}
+
+\usepackage{array}
+\newcolumntype{x}[1]{>{\centering\arraybackslash\hspace{0pt}}p{#1}}
+
+%%%%  Remove the "preprint submitted to" part. Don't worry about this either, it just looks better without it:
+\makeatletter
+\def\ps@pprintTitle{%
+  \let\@oddhead\@empty
+  \let\@evenhead\@empty
+  \let\@oddfoot\@empty
+  \let\@evenfoot\@oddfoot
+}
+\makeatother
+
+ \def\tightlist{} % This allows for subbullets!
+
+\usepackage{hyperref}
+\hypersetup{breaklinks=true,
+            bookmarks=true,
+            colorlinks=true,
+            citecolor=blue,
+            urlcolor=blue,
+            linkcolor=blue,
+            pdfborder={0 0 0}}
+
+
+% The following packages allow huxtable to work:
+\usepackage{siunitx}
+\usepackage{multirow}
+\usepackage{hhline}
+\usepackage{calc}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage{caption}
+
+
+\newenvironment{columns}[1][]{}{}
+
+\newenvironment{column}[1]{\begin{minipage}{#1}\ignorespaces}{%
+\end{minipage}
+\ifhmode\unskip\fi
+\aftergroup\useignorespacesandallpars}
+
+\def\useignorespacesandallpars#1\ignorespaces\fi{%
+#1\fi\ignorespacesandallpars}
+
+\makeatletter
+\def\ignorespacesandallpars{%
+  \@ifnextchar\par
+    {\expandafter\ignorespacesandallpars\@gobble}%
+    {}%
+}
+\makeatother
+
+\newlength{\cslhangindent}
+\setlength{\cslhangindent}{1.5em}
+\newenvironment{CSLReferences}%
+  {\setlength{\parindent}{0pt}%
+  \everypar{\setlength{\hangindent}{\cslhangindent}}\ignorespaces}%
+  {\par}
+
+
+\urlstyle{same}  % don't use monospace font for urls
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\setcounter{secnumdepth}{5}
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+
+%%% Include extra packages specified by user
+
+%%% Hard setting column skips for reports - this ensures greater consistency and control over the length settings in the document.
+%% page layout
+%% paragraphs
+\setlength{\baselineskip}{12pt plus 0pt minus 0pt}
+\setlength{\parskip}{12pt plus 0pt minus 0pt}
+\setlength{\parindent}{0pt plus 0pt minus 0pt}
+%% floats
+\setlength{\floatsep}{12pt plus 0 pt minus 0pt}
+\setlength{\textfloatsep}{20pt plus 0pt minus 0pt}
+\setlength{\intextsep}{14pt plus 0pt minus 0pt}
+\setlength{\dbltextfloatsep}{20pt plus 0pt minus 0pt}
+\setlength{\dblfloatsep}{14pt plus 0pt minus 0pt}
+%% maths
+\setlength{\abovedisplayskip}{12pt plus 0pt minus 0pt}
+\setlength{\belowdisplayskip}{12pt plus 0pt minus 0pt}
+%% lists
+\setlength{\topsep}{10pt plus 0pt minus 0pt}
+\setlength{\partopsep}{3pt plus 0pt minus 0pt}
+\setlength{\itemsep}{5pt plus 0pt minus 0pt}
+\setlength{\labelsep}{8mm plus 0mm minus 0mm}
+\setlength{\parsep}{\the\parskip}
+\setlength{\listparindent}{\the\parindent}
+%% verbatim
+\setlength{\fboxsep}{5pt plus 0pt minus 0pt}
+
+
+
+\begin{document}
+
+
+
+\begin{frontmatter}  %
+
+\title{Question2}
+
+% Set to FALSE if wanting to remove title (for submission)
+
+
+
+
+\author[Add1]{Joshua Strydom\footnote{\textbf{Contributions:}
+  \newline \emph{The authors would like to thank no institution for
+  money donated to this project. Thank you sincerely.}}}
+\ead{20718284@sun.ac.za}
+
+
+
+
+
+\address[Add1]{Stellenbosch University, Stellenbosch, South Africa}
+
+
+
+\vspace{1cm}
+
+
+
+
+
+\vspace{0.5cm}
+
+\end{frontmatter}
+
+
+
+%________________________
+% Header and Footers
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagestyle{fancy}
+\chead{}
+\rhead{}
+\lfoot{}
+\rfoot{\footnotesize Page \thepage}
+\lhead{}
+%\rfoot{\footnotesize Page \thepage } % "e.g. Page 2"
+\cfoot{}
+
+%\setlength\headheight{30pt}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%________________________
+
+\headsep 35pt % So that header does not go over title
+
+
+
+
+\hypertarget{introduction}{%
+\section{\texorpdfstring{Introduction
+\label{Introduction}}{Introduction }}\label{introduction}}
+
+The weather in London over the period 1979 through 2020 was analysed. I,
+the author, am to be of the opinion that the weather in London is not as
+enjoyable as my female classmate thinks it is. Having analysed the data,
+the weather in London could be said to be fair. London, on average,
+experiences neither great weather nor terrible weather.
+
+\begin{quote}
+Figures \ref{Figure1}, \ref{Figure2}, \ref{Figure3} and \ref{Figure4}
+make an attempt at finding out which months of the year are
+characterized by different weather patterns. It is noted that the months
+of June through September are arguably the most enjoyable months in
+London.
+\end{quote}
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Question2_files/figure-latex/Figure1-1} 
+
+}
+
+\caption{Cloud cover \label{Figure1}}\label{fig:Figure1}
+\end{figure}
+
+As can be seen in \ref{Figure1}, cloud cover is the least during the
+months of August and September. July and April are not far behind in
+this regard. I consider less cloud cover to be an indicator of good
+weather.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Question2_files/figure-latex/Figure2-1} 
+
+}
+
+\caption{Sunshine \label{Figure2}}\label{fig:Figure2}
+\end{figure}
+
+As can be seen in \ref{Figure2}, the months of June and July experience
+the most amount of sunshine. May and August follow closely behind. I
+consider more sunshine to be an indicator of good weather. The early and
+late parts of each year tend to experience less sunshine on average.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Question2_files/figure-latex/Figure3-1} 
+
+}
+
+\caption{Mean temperature \label{Figure3}}\label{fig:Figure3}
+\end{figure}
+
+As can be seen in \ref{Figure3}, the months of August and July
+experience the hottest average temperatures. June and September follow
+closely behind. The hottest month, on average, barely reaches 20
+degrees. In comparison to South Africa, London is a cold place to live.
+
+\begin{figure}[H]
+
+{\centering \includegraphics{Question2_files/figure-latex/Figure4-1} 
+
+}
+
+\caption{Mean precipitation \label{Figure4}}\label{fig:Figure4}
+\end{figure}
+
+As can be seen in \ref{Figure4}, the months of October and November
+experience the most average precipitation. December and January follow
+closely behind. It seems as though it is highly likely to a person
+living in London will experience during all months throughout the year.
+That is not to say that it is continuous rain though.
+
+\begin{table}[H]
+\centering
+\begin{tabular}{rrrrr}
+  \hline
+ & Avecloudcover & Avesunshine & Avemeantemp & Aveprecipitation \\ 
+  \hline
+1 & 5.27 & 4.34 & 11.44 & 1.67 \\ 
+   \hline
+\end{tabular}
+\caption{Average values throughout the year \label{tab1}} 
+\end{table}
+
+The yearly average of each factor can be seen in \ref{tab1}. London is
+not a hot place to live as the city averages roughly 11.44 degrees
+throughout the year. Cloud cover seems to be reasonably high as well. As
+aforementioned, it is likely to rain every month of the year in London
+but is is also likely to be reasonably sunny.
+
+\hypertarget{conclusion}{%
+\section{Conclusion}\label{conclusion}}
+
+A persons preference for weather types is highly subjective. My personal
+preference is toward a warm climate with sporadic rainfall. London has a
+modest climate with frequent rainfall. All in all, the weather is not
+awful and it is not mostly sunny nor mostly cold or rainy. The weather
+is modest but is slightly more characterized by bad weather than good
+weather.
+
+\newpage
+
+\bibliography{Tex/ref}
+
+
+
+
+
+\end{document}
