@@ -205,6 +205,8 @@ hospitalICU2 <- hospitalICU |>
 
 ## Data
 
+The first step was to convert the date column to date format using lubridate. 
+
 '''
 
 library("lubridate")
@@ -214,6 +216,8 @@ london_weather[ , 1] <- ymd(london_weather[, 1])
 '''
 
 ## Plotting
+
+Plots were generated using various functions. These plots considered monthly cloud cover, monthly sunshine, monthly mean temperature and monthly precipitation. 
 
 '''
 
@@ -240,6 +244,8 @@ monthlyprecipitation(data1 = london_weather)
 '''
 
 ## Table
+
+I order to display the averages for the year, variables needed to be created. These yearly outcome variables were combined into a table to make for a pretty visualisation. 
 
 '''
 
