@@ -1,6 +1,7 @@
 # 20718284-Data-Science-Exam
 2022 exam submission
 ## Getting started
+
 '''
 devtools::install_github("Nicktz/fmxdat", force = TRUE)
 CHOSEN_LOCATION <- "/Users/joshuastrydom/Desktop/ECONOMICS POSTGRADUATE/Masters/Data Science/20718284-Data-Science-Exam/"
@@ -13,3 +14,6 @@ Texevier::create_template(directory = glue::glue("{CHOSEN_LOCATION}Solution/2071
 Texevier::create_template(directory = glue::glue("{CHOSEN_LOCATION}Solution/20718284/"), template_name = "Question3")
 Texevier::create_template(directory = glue::glue("{CHOSEN_LOCATION}Solution/20718284/"), template_name = "Question4")
 '''
+
+# Question 1
+Much time was spent on data wrangling and manipulation. 
