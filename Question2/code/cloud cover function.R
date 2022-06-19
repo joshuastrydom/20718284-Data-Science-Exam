@@ -1,0 +1,33 @@
+monthlycloudcover <- function(data1=data1){
+    library(data.table)
+    January <- data1 |> filter(month(date) == 1) |> select(,c(date,cloud_cover))
+    Jan <- mean(January[,2], na.rm = TRUE)
+    Febuary <- data1 |> filter(month(date) == 2) |> select(,c(date,cloud_cover))
+    Feb <- mean(Febuary[,2], na.rm = TRUE)
+    March <- data1 |> filter(month(date) == 3) |> select(,c(date,cloud_cover))
+    Mar <- mean(March[,2], na.rm = TRUE)
+    April <- data1 |> filter(month(date) == 4) |> select(,c(date,cloud_cover))
+    Apr <- mean(April[,2], na.rm = TRUE)
+    May <- data1 |> filter(month(date) == 5) |> select(,c(date,cloud_cover))
+    May <- mean(May[,2], na.rm = TRUE)
+    June <- data1 |> filter(month(date) == 6) |> select(,c(date,cloud_cover))
+    Jun <- mean(June[,2], na.rm = TRUE)
+    July <- data1 |> filter(month(date) == 7) |> select(,c(date,cloud_cover))
+    Jul <- mean(July[,2], na.rm = TRUE)
+    August <- data1 |> filter(month(date) == 8) |> select(,c(date,cloud_cover))
+    Aug <- mean(August[,2], na.rm = TRUE)
+    September <- data1 |> filter(month(date) == 9) |> select(,c(date,cloud_cover))
+    Sep <- mean(September[,2], na.rm = TRUE)
+    October <- data1 |> filter(month(date) == 10) |> select(,c(date,cloud_cover))
+    Oct <- mean(October[,2], na.rm = TRUE)
+    November <- data1 |> filter(month(date) == 11) |> select(,c(date,cloud_cover))
+    Nov <- mean(November[,2], na.rm = TRUE)
+    December <- data1 |> filter(month(date) == 12) |> select(,c(date,cloud_cover))
+    Dec <- mean(December[,2], na.rm = TRUE)
+    df <- rbind(Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec)
+    df1 <- as.data.frame(df)
+    setDT(df1, keep.rownames = "Month")[]
+    ggplot(df1, aes(x = Month, y = V1)) +
+        geom_point() +
+        labs(y = "Cloud Cover")
+}
