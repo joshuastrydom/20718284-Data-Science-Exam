@@ -263,7 +263,7 @@ Aveprecipitation <- monthlyprecipitation_table(data1 = london_weather)
 
 library(xtable)
 
-data <- data.frame(Avecloudcover, Avesunshine, Avemeantemp, Aveprecipitation)
+> data <- data.frame(Avecloudcover, Avesunshine, Avemeantemp, Aveprecipitation)
 
 table <- xtable(data, caption = "Average values throughout the year \\label{tab1}")
   print.xtable(table,
